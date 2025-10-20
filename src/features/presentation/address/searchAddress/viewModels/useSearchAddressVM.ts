@@ -35,7 +35,7 @@ export function useSearchAddressVM() {
    */
   async function search() {
     const result = await searchAddressUC.execute({ 
-      searchText: searchQuery.value,
+      searchText: 1,
       fields: "all",
       sortedBy: 'asc',
       country: "KR"

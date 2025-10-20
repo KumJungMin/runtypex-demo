@@ -4,7 +4,7 @@ import { resolve } from 'path'
 import { vitePlugin as runtypex } from "runtypex";
 
 export default defineConfig({
-  plugins: [vue(), runtypex()],
+  plugins: [vue(), runtypex({ removeInProd: false })],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),

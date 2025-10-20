@@ -26,7 +26,6 @@ export class AddressRepositoryImpl implements IAddressRepository {
    * - DTO → Domain 변환 시 런타임 검증 자동 수행
    */
   async searchAddress(body: SearchAddressRequest): Promise<SearchAddressResponse> {
-    console.log("API 요청 DTO:", this.reqMapper);
     // ✅ Mapper 내부에서 toDTO() 실행 시 자동 validate/assert 수행
     const dtoRequest = this.reqMapper.toDTO(body);
 
