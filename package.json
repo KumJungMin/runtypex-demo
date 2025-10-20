@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "pinia": "^3.0.3",
-    "runtypex": "^0.1.9",
+    "runtypex": "^0.1.12",
     "typescript": "^5.9.3",
     "vue": "^3.4.0",
     "vue-router": "^4.2.0"

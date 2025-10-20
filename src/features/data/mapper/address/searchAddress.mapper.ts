@@ -1,4 +1,4 @@
-import { makeAssert } from "runtypex";
+import { makeAssert, type AssertFn } from "runtypex";
 import type {
   SearchAddressRequestDTO,
   SearchAddressResponseDTO,
@@ -7,8 +7,6 @@ import type {
   SearchAddressRequest,
   SearchAddressResponse,
 } from "@/features/domain/model/searchAddress.model";
-
-type AssertFn<T> = (v: unknown) => asserts v is T;
 
 /**
  * ✅ SearchAddressRequestMapper
