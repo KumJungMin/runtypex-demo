@@ -1,9 +1,7 @@
- <template>
-  <router-view />
+<template>
+  <RuntypexDemoPage />
 </template>
 
 <script lang="ts" setup>
-import './sample.ts';
-
-
+import RuntypexDemoPage from "./features/presentation/runtypexDemo/RuntypexDemoPage.vue";
 </script>
