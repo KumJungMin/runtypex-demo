@@ -7,13 +7,13 @@ import {
   transform,
 } from "runtypex/mapper";
 import type {
-  SearchAddressDomain,
+  SearchAddressDomainSource,
   SearchAddressDto,
 } from "./runtypexDemo.types";
 
 const helpers = mapperHelpers<SearchAddressDto>();
 
-export const addressMap = defineMap<SearchAddressDto, SearchAddressDomain>()({
+export const addressMap = defineMap<SearchAddressDto, SearchAddressDomainSource>()({
   id: source("RESULT.ID", {
     db: "address.id",
     description: "Address id",
@@ -79,9 +79,9 @@ export const toAddress = makeMapper(addressMap, {
 
 export function createPolicyViolationMessage() {
   return captureError(() => {
-    const badMap = defineMap<SearchAddressDto, { addressIdentifier: string }>()({
+    const badMap = {
       addressIdentifier: source("RESULT.ID"),
-    });
+    };
     makeMapper(badMap, { policy: addressPolicy, policyMode: "error" });
   });
 }

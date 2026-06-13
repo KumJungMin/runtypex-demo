@@ -4,7 +4,15 @@ import { resolve } from 'path'
 import { vitePlugin as runtypex } from "runtypex";
 
 export default defineConfig({
-  plugins: [vue(), runtypex({ removeInProd: false })],
+  plugins: [
+    vue(),
+    runtypex({
+      removeInProd: false,
+      docs: {
+        include: "src/features/presentation/runtypexDemo/**/*.mapper.ts",
+      },
+    }),
+  ],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),

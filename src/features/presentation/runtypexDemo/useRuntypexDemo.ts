@@ -1,13 +1,11 @@
 import { computed, ref } from "vue";
+import generatedJSDocExample from "./runtypex.generated.ts?raw";
 import {
   addressMap,
   createPolicyViolationMessage,
   toAddress,
 } from "./runtypexDemo.mapper";
-import {
-  basicMapperCode,
-  generatedJSDocExample,
-} from "./runtypexDemo.snippets";
+import { basicMapperCode } from "./runtypexDemo.snippets";
 import {
   addressSearchApiResponse,
   createAddressSearchViewResult,

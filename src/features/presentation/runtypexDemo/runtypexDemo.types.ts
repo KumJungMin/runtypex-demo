@@ -1,3 +1,7 @@
+import type { SearchAddressDomain as GeneratedSearchAddressDomain } from "./runtypex.generated";
+
+export type { SearchAddressDomain } from "./runtypex.generated";
+
 export interface SearchAddressDto {
   SEARCH_TXT: string;
   FIELDS: string;
@@ -20,84 +24,26 @@ export interface SearchAddressDto {
   }>;
 }
 
-export interface SearchAddressDomain {
-  /**
-   * Address id
-   *
-   * DTO: SearchAddressDto.RESULT.ID Address identifier from the API response.
-   * DTO type: string
-   * DB: address.id
-   * Domain type: string
-   */
+export interface SearchAddressDomainSource {
+  /** Address id */
   id: string;
-
-  /**
-   * Address title
-   *
-   * DTO: SearchAddressDto.RESULT.TITLE Human-readable address title from the API response.
-   * DTO type: string
-   * DB: address.title
-   * Domain type: string
-   */
+  /** Address title */
   title: string;
-
-  /**
-   * DTO: SearchAddressDto.RESULT.DETAIL Detailed address text from the API response.
-   * DTO type: string
-   * Domain type: string
-   */
+  /** Detailed address text */
   detail: string;
-
-  /**
-   * Postal code
-   *
-   * DTO: SearchAddressDto.RESULT.ZIP_CODE Postal code returned by the address API.
-   * DTO type: string
-   * DB: address.zip_code
-   * Domain type: string
-   */
+  /** Postal code */
   zipCode: string;
-
-  /**
-   * DTO: SearchAddressDto.COUNTRY Country code for the searched address.
-   * DTO type: "KR" | "US"
-   * Domain type: string
-   */
+  /** Country code */
   country: string;
-
-  /**
-   * DTO: SearchAddressDto.SORT Boolean sort flag where true means ascending order.
-   * DTO type: boolean
-   * Domain type: "asc" | "desc"
-   */
+  /** Sort direction */
   sortedBy: "asc" | "desc";
-
-  /**
-   * DTO: SearchAddressDto.TAGS.0.ID Identifier of the first tag attached to the result.
-   * DTO type: number
-   * Domain type: number
-   */
+  /** First tag id */
   firstTagId: number;
-
-  /**
-   * DTO: SearchAddressDto.RESULT.TYPE Address result type used to build the display badge.
-   * DTO type: "ROAD" | "JIBUN"
-   * Domain type: string
-   */
+  /** Display badge */
   badge: string;
-
-  /**
-   * DTO: SearchAddressDto.STATUS Search status from the API response.
-   * DTO type: "ACTIVE" | "INACTIVE"
-   * Domain type: boolean
-   */
+  /** Whether the address can be shown as a search result */
   isSearchable: boolean;
-
-  /**
-   * DTO: SearchAddressDto.META.MEMO Optional memo included in response metadata.
-   * DTO type: string | undefined
-   * Domain type: string
-   */
+  /** User-facing memo */
   memo: string;
 }
 
@@ -119,10 +65,10 @@ export interface AddressSearchApiResponse {
 }
 
 export interface AddressSearchViewResult {
-  addresses: SearchAddressDomain[];
+  addresses: GeneratedSearchAddressDomain[];
   keyword: string;
   requestedAt: string;
-  selectedAddress: SearchAddressDomain | null;
+  selectedAddress: GeneratedSearchAddressDomain | null;
   totalCount: number;
 }
 
