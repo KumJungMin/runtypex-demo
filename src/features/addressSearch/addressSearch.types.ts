@@ -1,6 +1,6 @@
-import type { AddressCandidate as GeneratedAddressCandidate } from "./runtypex.generated";
+import type { AddressCandidate as GeneratedAddressCandidate } from "./addressSearch.generated";
 
-export type { AddressCandidate } from "./runtypex.generated";
+export type { AddressCandidate } from "./addressSearch.generated";
 
 export interface AddressCandidateDto {
   ADDRESS_ID: string;
