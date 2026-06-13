@@ -2,6 +2,39 @@ import type { AddressCandidate as GeneratedAddressCandidate } from "./addressSea
 
 export type { AddressCandidate } from "./addressSearch.generated";
 
+export interface AddressDirectoryCandidateDto {
+  ADDRESS_ID: string;
+  ADDRESS_TYPE: "ROAD" | "PARCEL";
+  DISPLAY: {
+    TITLE: string;
+    DETAIL: string;
+    POSTAL_CODE: string;
+  };
+  LOCATION: {
+    COUNTRY: "KR" | "US";
+    CITY: string;
+  };
+}
+
+export interface AddressDirectorySearchResponseDto {
+  REQUEST_ID: string;
+  KEYWORD: string;
+  ITEMS: AddressDirectoryCandidateDto[];
+}
+
+export interface DeliveryAvailabilityDto {
+  ADDRESS_ID: string;
+  DELIVERY_AVAILABLE: boolean;
+  DELIVERY_PRIORITY: number;
+  OPERATION_MEMO?: string;
+  UPDATED_AT: string;
+}
+
+export interface DeliveryAvailabilityResponseDto {
+  REQUEST_ID: string;
+  ITEMS: DeliveryAvailabilityDto[];
+}
+
 export interface AddressCandidateDto {
   ADDRESS_ID: string;
   ADDRESS_TYPE: "ROAD" | "PARCEL";
