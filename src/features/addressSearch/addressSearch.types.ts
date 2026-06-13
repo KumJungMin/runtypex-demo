@@ -36,31 +36,8 @@ export interface DeliveryAvailabilityResponseDto {
 }
 
 export interface AddressCandidateDto {
-  ADDRESS_ID: string;
-  ADDRESS_TYPE: "ROAD" | "PARCEL";
-  DISPLAY: {
-    TITLE: string;
-    DETAIL: string;
-    POSTAL_CODE: string;
-  };
-  LOCATION: {
-    COUNTRY: "KR" | "US";
-    CITY: string;
-  };
-  DELIVERY: {
-    AVAILABLE: boolean;
-    PRIORITY: number;
-  };
-  META: {
-    UPDATED_AT: string;
-    MEMO?: string;
-  };
-}
-
-export interface AddressSearchResponseDto {
-  REQUEST_ID: string;
-  KEYWORD: string;
-  ITEMS: AddressCandidateDto[];
+  ADDRESS: AddressDirectoryCandidateDto;
+  DELIVERY: DeliveryAvailabilityDto;
 }
 
 export interface AddressSearchForm {

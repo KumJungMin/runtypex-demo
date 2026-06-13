@@ -8,22 +8,23 @@ import {
 } from "./addressSearch.validation";
 
 const dto: AddressCandidateDto = {
-  ADDRESS_ID: "addr-test",
-  ADDRESS_TYPE: "ROAD",
-  DISPLAY: {
-    TITLE: "Test Address",
-    DETAIL: "123 Test Road",
-    POSTAL_CODE: "10000",
-  },
-  LOCATION: {
-    COUNTRY: "KR",
-    CITY: "Seoul",
+  ADDRESS: {
+    ADDRESS_ID: "addr-test",
+    ADDRESS_TYPE: "ROAD",
+    DISPLAY: {
+      TITLE: "Test Address",
+      DETAIL: "123 Test Road",
+      POSTAL_CODE: "10000",
+    },
+    LOCATION: {
+      COUNTRY: "KR",
+      CITY: "Seoul",
+    },
   },
   DELIVERY: {
-    AVAILABLE: true,
-    PRIORITY: 2,
-  },
-  META: {
+    ADDRESS_ID: "addr-test",
+    DELIVERY_AVAILABLE: true,
+    DELIVERY_PRIORITY: 2,
     UPDATED_AT: "2026-06-13T09:00:00+09:00",
   },
 };
@@ -54,7 +55,7 @@ describe("address search example", () => {
     expect(result).toEqual({
       includeUnavailable: false,
       keyword: "Busan Port",
-      requestId: "req-busan-001",
+      requestId: "req-busan-001/delivery-busan-001",
       totalCount: 1,
       selected: expect.objectContaining({
         id: "addr-2001",
