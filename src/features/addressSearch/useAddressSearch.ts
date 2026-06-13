@@ -4,6 +4,7 @@ import type { AddressCandidate, AddressSearchResult } from "./addressSearch.type
 
 export function useAddressSearch() {
   const keyword = ref("Seoul Station");
+  const includeUnavailable = ref(false);
   const result = ref<AddressSearchResult | null>(null);
   const selectedId = ref<string | null>(null);
   const loading = ref(false);
@@ -22,7 +23,10 @@ export function useAddressSearch() {
     errorMessage.value = "";
 
     try {
-      const nextResult = await searchAddressCandidates(keyword.value);
+      const nextResult = await searchAddressCandidates({
+        keyword: keyword.value,
+        includeUnavailable: includeUnavailable.value,
+      });
       result.value = nextResult;
       selectedId.value = nextResult.selected?.id ?? null;
     } catch (error) {
@@ -43,6 +47,7 @@ export function useAddressSearch() {
 
   return {
     errorMessage,
+    includeUnavailable,
     keyword,
     loading,
     result,

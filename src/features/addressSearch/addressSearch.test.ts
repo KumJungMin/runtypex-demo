@@ -2,6 +2,10 @@ import { describe, expect, it } from "vitest";
 import { toAddressCandidate } from "./addressSearch.mapper";
 import { searchAddressCandidates } from "./addressSearch.service";
 import type { AddressCandidateDto } from "./addressSearch.types";
+import {
+  isAddressSearchForm,
+  parseAddressSearchForm,
+} from "./addressSearch.validation";
 
 const dto: AddressCandidateDto = {
   ADDRESS_ID: "addr-test",
@@ -42,9 +46,13 @@ describe("address search example", () => {
   });
 
   it("returns view-ready address search results", async () => {
-    const result = await searchAddressCandidates("Busan Port");
+    const result = await searchAddressCandidates({
+      keyword: "Busan Port",
+      includeUnavailable: false,
+    });
 
     expect(result).toEqual({
+      includeUnavailable: false,
       keyword: "Busan Port",
       requestId: "req-busan-001",
       totalCount: 1,
@@ -59,5 +67,35 @@ describe("address search example", () => {
         }),
       ],
     });
+  });
+
+  it("validates the search form before calling the address provider", () => {
+    expect(isAddressSearchForm({ keyword: "Seoul Station" })).toBe(true);
+    expect(isAddressSearchForm({ keyword: 123 })).toBe(false);
+    expect(parseAddressSearchForm({ keyword: "  Seoul Station  " })).toEqual({
+      keyword: "Seoul Station",
+      includeUnavailable: false,
+    });
+    expect(() => parseAddressSearchForm({ keyword: "" })).toThrow(
+      "Enter a search keyword.",
+    );
+  });
+
+  it("can include unavailable candidates when the validated form allows it", async () => {
+    const result = await searchAddressCandidates({
+      keyword: "Seoul Station",
+      includeUnavailable: true,
+    });
+
+    expect(result.includeUnavailable).toBe(true);
+    expect(result.totalCount).toBe(2);
+    expect(result.candidates).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: "addr-1002",
+          deliverable: false,
+        }),
+      ]),
+    );
   });
 });

@@ -30,6 +30,11 @@ export interface AddressSearchResponseDto {
   ITEMS: AddressCandidateDto[];
 }
 
+export interface AddressSearchForm {
+  keyword: string;
+  includeUnavailable?: boolean;
+}
+
 export interface AddressCandidateSource {
   /** Stable address identifier used by checkout and shipping APIs. */
   id: string;
@@ -57,6 +62,7 @@ export interface AddressCandidateSource {
 
 export interface AddressSearchResult {
   candidates: GeneratedAddressCandidate[];
+  includeUnavailable: boolean;
   keyword: string;
   requestId: string;
   selected: GeneratedAddressCandidate | null;

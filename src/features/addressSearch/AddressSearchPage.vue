@@ -14,6 +14,11 @@
             {{ loading ? "Searching" : "Search" }}
           </button>
         </div>
+
+        <label class="availability-toggle">
+          <input v-model="includeUnavailable" type="checkbox" />
+          <span>Show unavailable addresses</span>
+        </label>
       </form>
 
       <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
@@ -22,7 +27,13 @@
         <button
           v-for="candidate in result?.candidates"
           :key="candidate.id"
-          :class="['address-result', { selected: candidate.id === selectedAddress?.id }]"
+          :class="[
+            'address-result',
+            {
+              selected: candidate.id === selectedAddress?.id,
+              unavailable: !candidate.deliverable,
+            },
+          ]"
           type="button"
           @click="selectAddress(candidate.id)"
         >
@@ -30,6 +41,7 @@
           <span class="result-detail">{{ candidate.detail }}</span>
           <span class="result-meta">
             <strong>{{ candidate.badge }}</strong>
+            <span>{{ candidate.deliverable ? "Deliverable" : "Unavailable" }}</span>
             {{ candidate.postalCode }}
           </span>
         </button>
@@ -79,6 +91,7 @@ import { useAddressSearch } from "./useAddressSearch";
 
 const {
   errorMessage,
+  includeUnavailable,
   keyword,
   loading,
   result,
@@ -187,6 +200,22 @@ button:disabled {
   opacity: 0.65;
 }
 
+.availability-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #465568;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.availability-toggle input {
+  width: 16px;
+  min-height: 16px;
+  margin: 0;
+  accent-color: #0f766e;
+}
+
 .error-message {
   margin: 0 0 16px;
   color: #b91c1c;
@@ -213,6 +242,15 @@ button:disabled {
 .address-result.selected {
   border-color: #0f766e;
   background: #ecfdf5;
+}
+
+.address-result.unavailable {
+  background: #fff7ed;
+}
+
+.address-result.unavailable.selected {
+  border-color: #c2410c;
+  background: #ffedd5;
 }
 
 .result-title {
