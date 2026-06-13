@@ -9,7 +9,7 @@ export default defineConfig({
     runtypex({
       removeInProd: false,
       docs: {
-        include: "",
+        include: "src/features/**/*.mapper.ts",
       },
     }),
   ]
