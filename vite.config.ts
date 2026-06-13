@@ -9,17 +9,8 @@ export default defineConfig({
     runtypex({
       removeInProd: false,
       docs: {
-        include: "src/features/presentation/runtypexDemo/**/*.mapper.ts",
+        include: "",
       },
     }),
-  ],
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src'),
-      '@/domain': resolve(__dirname, 'src/domain'),
-      '@/data': resolve(__dirname, 'src/data'),
-      '@/presentation': resolve(__dirname, 'src/presentation'),
-      '@/shared': resolve(__dirname, 'src/shared')
-    }
-  },
+  ]
 })
