@@ -82,6 +82,11 @@
       </template>
 
       <p v-else class="empty-state">No deliverable address selected.</p>
+
+      <section class="runtime-guard-panel" aria-label="makeValidate account guard">
+        <span>makeValidate account guard</span>
+        <strong>{{ makeValidateRuntimeSummary }}</strong>
+      </section>
     </aside>
   </main>
 </template>
@@ -94,6 +99,7 @@ const {
   includeUnavailable,
   keyword,
   loading,
+  makeValidateRuntimeSummary,
   result,
   selectedAddress,
   selectAddress,
@@ -331,6 +337,26 @@ dd {
   padding: 16px;
   color: #334155;
   font-weight: 700;
+}
+
+.runtime-guard-panel {
+  display: grid;
+  gap: 8px;
+  margin-top: 18px;
+  border-top: 1px solid #e4eaf1;
+  padding-top: 18px;
+}
+
+.runtime-guard-panel span {
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.runtime-guard-panel strong {
+  color: #18212f;
+  font-size: 14px;
+  line-height: 1.45;
 }
 
 @media (max-width: 900px) {

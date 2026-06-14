@@ -1,4 +1,5 @@
 import { computed, onMounted, ref } from "vue";
+import { makeValidateRuntimeSummary } from "../makeValidateDemo/makeValidateDemo.runtime";
 import { searchAddressCandidates } from "./addressSearch.service";
 import type { AddressCandidate, AddressSearchResult } from "./addressSearch.types";
 
@@ -50,6 +51,7 @@ export function useAddressSearch() {
     includeUnavailable,
     keyword,
     loading,
+    makeValidateRuntimeSummary,
     result,
     selectedAddress,
     selectAddress,
