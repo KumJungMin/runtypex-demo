@@ -1,3 +1,7 @@
+import type { AddressCandidate as GeneratedAddressCandidate } from "./addressSearch.generated";
+
+export type { AddressCandidate } from "./addressSearch.generated";
+
 export interface AddressDirectoryCandidateDto {
   ADDRESS_ID: string;
   ADDRESS_TYPE: "ROAD" | "PARCEL";
@@ -66,13 +70,11 @@ export interface AddressCandidateSource {
   updatedAt: string;
 }
 
-export interface AddressCandidate extends AddressCandidateSource {}
-
 export interface AddressSearchResult {
-  candidates: AddressCandidate[];
+  candidates: GeneratedAddressCandidate[];
   includeUnavailable: boolean;
   keyword: string;
   requestId: string;
-  selected: AddressCandidate | null;
+  selected: GeneratedAddressCandidate | null;
   totalCount: number;
 }
