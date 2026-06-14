@@ -20,6 +20,16 @@ Each step is intentionally split so the code diff shows what changes before and 
 | step4 | [map provider responses with makeMapper](https://github.com/KumJungMin/runtypex-demo/commit/626b0a9e00227bd8ac9913c30e4365d14c2537d9) | Adds `defineMap`, `source`, `mapperHelpers.transform`, `makeMapper`, generated mapper docs, and tests that show DTO input becoming view-ready address candidates. |
 | step5 | [render the address search demo app](https://github.com/KumJungMin/runtypex-demo/commit/f59e6cc20305528934ba766f2ecac6b96c419880) | Replaces the old demo surface with the new address search UI and removes obsolete sample layers. After this step, `tsc`, `vitest`, and `vite build` pass with the new demo. |
 
+## makeValidate walkthrough
+
+This sequence isolates the `makeValidate` flow from raw API data to build output.
+
+| Step | Commit | What changes |
+| --- | --- | --- |
+| step1 | [add makeValidate mock account APIs](https://github.com/KumJungMin/runtypex-demo/commit/486f777627ae87b4afd5ca4cc5bcfec808597a10) | Adds a virtual account verification API that returns `unknown` provider payloads, including one valid response and one invalid response. |
+| step2 | [guard account responses with makeValidate](https://github.com/KumJungMin/runtypex-demo/commit/c062040067bd6620b14413c667d4c0218faf0b88) | Adds `makeValidate<AccountVerificationApiResponseDto>()`, a parser, a service boundary, and tests that show valid payloads becoming typed results while invalid payloads fail. |
+| step3 | [expose makeValidate runtime guards in dist](https://github.com/KumJungMin/runtypex-demo/commit/50c9b8e49e2f73f4cedd5c6dcb01c5ec8cbfaf12) | Uses the scenario in the app so `npm run build` emits the generated runtime guard into `dist/assets/index-*.js`, then adds `npm run check:make-validate-dist` to verify that output. |
+
 Run the demo:
 
 ```bash
@@ -32,4 +42,5 @@ Verify it:
 ```bash
 npx vitest run
 npm run build
+npm run check:make-validate-dist
 ```
