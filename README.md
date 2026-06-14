@@ -28,7 +28,33 @@ This sequence isolates the `makeValidate` flow from raw API data to build output
 | --- | --- | --- |
 | step1 | [add makeValidate mock account APIs](https://github.com/KumJungMin/runtypex-demo/commit/486f777627ae87b4afd5ca4cc5bcfec808597a10) | Adds a virtual account verification API that returns `unknown` provider payloads, including one valid response and one invalid response. |
 | step2 | [guard account responses with makeValidate](https://github.com/KumJungMin/runtypex-demo/commit/c062040067bd6620b14413c667d4c0218faf0b88) | Adds `makeValidate<AccountVerificationApiResponseDto>()`, a parser, a service boundary, and tests that show valid payloads becoming typed results while invalid payloads fail. |
-| step3 | [expose makeValidate runtime guards in dist](https://github.com/KumJungMin/runtypex-demo/commit/50c9b8e49e2f73f4cedd5c6dcb01c5ec8cbfaf12) | Uses the scenario in the app so `npm run build` emits the generated runtime guard into `dist/assets/index-*.js`, then adds `npm run check:make-validate-dist` to verify that output. |
+| step3 | expose makeValidate runtime guards in dist | The `makeValidate<AccountVerificationApiResponseDto>()` call site explains that `npm run build` emits the generated runtime guard into `dist/assets/index-*.js`. |
+
+After `npm run build`, this source call:
+
+```ts
+export const isAccountVerificationApiResponse =
+  makeValidate<AccountVerificationApiResponseDto>();
+```
+
+is emitted into `dist/assets/index-*.js` as an inline runtime guard like this:
+
+```js
+const isAccountVerificationApiResponse = (value) =>
+  typeof value === "object" &&
+  value !== null &&
+  typeof value.REQUEST_ID === "string" &&
+  typeof value.RESULT === "object" &&
+  value.RESULT !== null &&
+  typeof value.RESULT.ACCOUNT_NUMBER === "string" &&
+  (value.RESULT.BANK_CODE === "KB" ||
+    value.RESULT.BANK_CODE === "SHINHAN") &&
+  typeof value.RESULT.HOLDER_NAME === "string" &&
+  (value.RESULT.RISK_FLAGS === undefined ||
+    Array.isArray(value.RESULT.RISK_FLAGS)) &&
+  typeof value.RESULT.VERIFIED === "boolean" &&
+  typeof value.RESULT.VERIFIED_AT === "string";
+```
 
 Run the demo:
 
@@ -42,5 +68,4 @@ Verify it:
 ```bash
 npx vitest run
 npm run build
-npm run check:make-validate-dist
 ```

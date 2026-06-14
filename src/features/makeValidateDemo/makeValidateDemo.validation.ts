@@ -7,6 +7,10 @@ import type {
 } from "./makeValidateDemo.types";
 
 export const isAccountVerificationApiResponse =
+  // During `npm run build`, the runtypex Vite plugin replaces this call with
+  // an inline guard in `dist/assets/index-*.js`, including checks such as
+  // `typeof value.RESULT.ACCOUNT_NUMBER === "string"` and
+  // `typeof value.RESULT.VERIFIED === "boolean"`.
   makeValidate<AccountVerificationApiResponseDto>();
 
 export function parseAccountVerificationResponse(
