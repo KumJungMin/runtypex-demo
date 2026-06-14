@@ -1,7 +1,7 @@
 <template>
-  <RuntypexDemoPage />
+  <AddressSearchPage />
 </template>
 
 <script lang="ts" setup>
-import RuntypexDemoPage from "./features/presentation/runtypexDemo/RuntypexDemoPage.vue";
+import AddressSearchPage from "./features/addressSearch/AddressSearchPage.vue";
 </script>
