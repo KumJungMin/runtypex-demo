@@ -9,7 +9,9 @@ export default defineConfig({
     runtypex({
       removeInProd: false,
       docs: {
-        include: "src/features/presentation/runtypexDemo/**/*.mapper.ts",
+        include: "src/features/**/*.mapper.ts",
+        generatedFileName: ({ sourceFileBaseName }) =>
+          sourceFileBaseName.replace(/\.mapper\.ts$/, ".generated.ts"),
       },
     }),
   ],
